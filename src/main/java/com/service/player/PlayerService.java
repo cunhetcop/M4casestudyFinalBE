@@ -109,4 +109,5 @@ public class PlayerService implements IPlayerService {
     public Page<Player> findAllPage(Pageable pageable) {
         return playerRepository.findAll(pageable);
     }
+
 }

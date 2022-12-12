@@ -17,6 +17,9 @@ public interface IPlayerRepository extends PagingAndSortingRepository<Player, Lo
     @Query(value = "select *, (salary + (salary * 0.1 * play_time) + bonus) as income from player join player_income pi on pi.id = player.player_income_id order by income desc limit 1;", nativeQuery = true)
     Player findPlayerMaxSalary();
 
+    @Query(nativeQuery = true, value = "selec * from player where username = :username")
+    Player finByUsername(@Param("username") String username);
+
 
     @Query(value = "select p from Player p join PlayerIncome pi on p.playerIncome.id = pi.id order by (pi.salary + (pi.salary * 0.1 * pi.playTime)) ASC")
     Page<Player> sortPlayerSalaryAsc(Pageable pageable);
